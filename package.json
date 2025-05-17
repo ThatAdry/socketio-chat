@@ -1,0 +1,40 @@
+{
+  "name": "socketio-chat",
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/server.js",
+    "build": "npm run build:client && npm run build:socket && npm run build:server",
+    "build:client": "tsc -b && vite build --outDir dist/client",
+    "build:socket": "vite build --ssr ./src/backend/socket-server.ts --outDir dist/socket",
+    "build:server": "vite build --ssr ./src/entry-server.tsx --outDir dist/server",
+    "lint": "eslint .",
+    "serve": "cross-env NODE_ENV=production node src/server"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.4",
+    "cross-env": "^7.0.3",
+    "express": "^5.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "tailwindcss": "^4.1.4",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react-swc": "^3.8.0",
+    "eslint": "^9.22.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "tailwind-scrollbar": "^4.0.2",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.26.1",
+    "vite": "^6.3.5"
+  }
+}

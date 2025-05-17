@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@plugin "tailwind-scrollbar" {
+    nocompatible: true;
+}
+
+html, body, #root {
+    margin: 0;
+    height: 100%;
+}
+
+@theme {
+    --container-screen: 80em;
+    --shadow-hr: 0 2px 5px rgba(0,0,0,0.4);
+
+    --color-main-50: #F6F6F7;
+    --color-main-100: #CBCBCE;
+    --color-main-200: #A0A0A5;
+    --color-main-300: #75757D;
+    --color-main-400: #4E4E57;
+    --color-main-500: #44444C;
+    --color-main-600: #3A3A41;
+    --color-main-700: #303036;
+    --color-main-800: #27272B;
+    --color-main-900: #1D1D20;
+    --color-main-950: #131315;
+
+    --animate-bubble: bubble 0.15s ease-out;
+    --animate-appear: appear 0.2s ease-out;
+
+    @keyframes bubble {
+        0% { transform: scale(0) }
+        100% { transform: scale(1) }
+    }
+
+    @keyframes appear {
+        0% { opacity: 0 }
+        100% { opacity: 1 }
+    }
+}
