@@ -1,17 +1,9 @@
 export type ContentTypeMap = {
   text: { message: string };
-  spoiler: { message: string; view: boolean };
   sticker: { id: number };
   alert: {
     level: "normal" | "warning" | "danger";
     description: string;
-  };
-  poll: {
-    title: string;
-    uniqueChoice: boolean;
-    options: {
-      [key: string]: string[];
-    };
   };
   deleted: { text: string };
 };

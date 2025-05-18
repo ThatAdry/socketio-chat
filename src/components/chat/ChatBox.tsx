@@ -12,9 +12,9 @@ function ChatBox() {
   const adminId = GroupStore((state) => state.admin.id);
   const chatHistory = ChatStore((state) => state.history);
   const getBubble = ChatStore((state) => state.getBubble);
-  const insertBubble = ChatStore((state) => state.insertBubble);
-  const updateBubble = ChatStore((state) => state.modifyBubble);
-  const updateChat = ChatStore((state) => state.update);
+  const insertBubble = ChatStore((state) => state.insert);
+  const modifyBubble = ChatStore((state) => state.modify);
+  const refreshChat = ChatStore((state) => state.refresh);
 
   useEffect(() => {
     Socket.on("message", (content) => {
@@ -22,23 +22,21 @@ function ChatBox() {
     });
 
     Socket.on("reactMessage", (value, id, userId) => {
-      updateBubble(id, (bubble) => {
+      modifyBubble(id, (bubble) => {
         bubble.react(value, userId);
       });
     });
 
     Socket.on("unReactMessage", (value, id, userId) => {
-      updateBubble(id, (bubble) => {
+      modifyBubble(id, (bubble) => {
         bubble.unReact(value, userId);
       });
     });
 
     Socket.on("deleteMessage", (id, from) => {
-      const bubble = getBubble(id);
-      if (bubble && (bubble.authorId == from || adminId == from)) {
-        bubble.setRemoved();
-        updateChat();
-      }
+      modifyBubble(id, (bubble) => {
+        if (bubble.authorId == from || adminId == from) bubble.setRemoved();
+      });
     });
 
     return () => {

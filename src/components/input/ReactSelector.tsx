@@ -8,26 +8,26 @@ const reactionList = ["😂", "😭", "😐", "🤨", "😡", "💀"]
 
 export default function ReactSelector() {
   const myId = ProfileStore((state) => state.id)
-  const reactIdFlag = AppStore((state) => state.reactId);
-  const setReactIdFlag = AppStore((state) => state.setReactId);
+  const reactId = AppStore((state) => state.reactId);
+  const setReactId = AppStore((state) => state.setReactId);
   const getBubble = ChatStore((state) => state.getBubble);
-  const updateBubble = ChatStore((state) => state.modifyBubble);
+  const modifyBubble = ChatStore((state) => state.modify);
 
-  if (reactIdFlag == -1) return null;
+  if (reactId == -1) return null;
 
-  const bubble = getBubble(reactIdFlag)
+  const bubble = getBubble(reactId)
   const list = reactionList.filter(emoji => bubble?.hasReaction(myId, emoji) == false);
 
   const reactMessage = (value: string) => {
-    setReactIdFlag(-1)
-    Socket.emit("reactMessage", value, reactIdFlag, () => {
-      updateBubble(reactIdFlag, (bubble) => bubble.react(value, myId))
+    setReactId(-1)
+    Socket.emit("reactMessage", value, reactId, () => {
+      modifyBubble(reactId, (bubble) => bubble.react(value, myId))
     })
   }
 
   return (
     <div className="bg-main-800 text-white/75 flex items-center">
-      <button className="cursor-pointer hover:text-white px-4 py-2" onClick={() => setReactIdFlag(-1)}>
+      <button className="cursor-pointer hover:text-white px-4 py-2" onClick={() => setReactId(-1)}>
         <XMarkIcon />
       </button>
       <label>React</label>

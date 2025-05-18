@@ -6,7 +6,7 @@ import BubbleContainer from "./classes/BubbleContainer";
 
 export interface ClientEvents {
   logged: (data: SocketData) => void;
-  message: (container: ReturnType<typeof BubbleContainer.prototype.toJSON>, callback: (containerId: number) => void) => void;
+  message: (content: BubbleContainer["content"], replyId: number, callback: (containerId: number) => void) => void;
   sticker: (id: number, callback: (containerId: number) => void) => void;
   reactMessage: (value: string, id: number, callback: () => void) => void;
   unReactMessage: (value: string, id: number, callback: () => void) => void;

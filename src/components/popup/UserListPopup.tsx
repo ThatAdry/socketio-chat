@@ -7,13 +7,11 @@ import ExitIcon from "../svg/24/ExitIcon";
 import XMarkIcon from "../svg/24/XMarkIcon";
 
 function UserListPopup() {
-  const myId = ProfileStore((state) => state.id);
-  const users = GroupStore((state) => state.users);
+  const userId = ProfileStore((state) => state.id);
   const adminId = GroupStore((state) => state.admin.id);
-
+  const usersList = GroupStore((state) => state.users);
   const popupId = AppStore((state) => state.popupId);
   const setPopupId = AppStore((state) => state.setPopupId);
-
   
   if (popupId != "userlist") return null;
 
@@ -37,15 +35,15 @@ function UserListPopup() {
           </div>
         </div>
         <div className="bg-main-700">
-          {users.map((user, i) => (
+          {usersList.map((user, i) => (
             <div className="flex justify-between" key={i}>
               <div className="flex gap-2 items-center p-2">
                 <span className="text-white/50">{i + 1}</span>
                 <label>{user.name}</label>
-                {myId == user.id ? <span className="text-white/50">(Tu)</span> : null}
+                {userId == user.id ? <span className="text-white/50">(Tu)</span> : null}
                 {user.admin ? <CrownIcon /> : null}
               </div>
-              {adminId == myId && user.id != myId ? (
+              {adminId == userId && user.id != userId ? (
                 <button className="cursor-pointer p-2 text-white/75 hover:text-white" onClick={() => Socket.emit("kickUser", user.id)}>
                   <XMarkIcon />
                 </button>

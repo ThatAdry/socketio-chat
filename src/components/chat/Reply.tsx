@@ -33,7 +33,7 @@ export default function Reply({ id }: { id: number }) {
   } else if (content.type == "deleted") {
     return (
       <ContainerReply id={id}>
-        <label className="text-white/50">Deleted message</label>
+        <label className="text-white/50">Message deleted</label>
       </ContainerReply>
     );
   } else return null;

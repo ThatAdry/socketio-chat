@@ -66,18 +66,16 @@ export default function io(ServerInstace: HTTPServer) {
   io.on("connection", function (socket) {
     const { group, user } = socket.data;
 
-    user.socketId = socket.id
+    user.socketId = socket.id;
     socket.join(group.id);
     socket.emit("logged", socket.data);
     socket.to(group.id).emit("newUser", user);
 
     // MESSAGES
-    socket.on("message", (content, callback) => {
-      content.id = group.messageCount;
-      content.authorId = user.id;
-      content.authorName = user.name;
+    socket.on("message", (content, replyId, callback) => {
+      const bubble = new BubbleContainer(content, group.messageCount, user.id, user.name, replyId);
+      socket.to(group.id).emit("message", bubble);
       callback(group.messageCount);
-      socket.to(group.id).emit("message", content);
       group.messageCount++;
     });
 
@@ -97,12 +95,12 @@ export default function io(ServerInstace: HTTPServer) {
     });
 
     socket.on("kickUser", (id) => {
-      const user = group.getUser(id)
-      if(user) {
+      const user = group.getUser(id);
+      if (user) {
         io.to(group.id).emit("leaveUser", user.id);
-        io.sockets.sockets.get(user.socketId)?.disconnect(true)
+        io.sockets.sockets.get(user.socketId)?.disconnect(true);
       }
-    })
+    });
 
     socket.on("disconnect", () => {
       try {
@@ -115,12 +113,11 @@ export default function io(ServerInstace: HTTPServer) {
 
         if (user.id == group.admin.id) {
           group.admin = group.users[0];
-          group.admin.admin = true
-          socket.to(group.id).emit("newAdmin", group.admin)
+          group.admin.admin = true;
+          socket.to(group.id).emit("newAdmin", group.admin);
         }
-
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     });
   });

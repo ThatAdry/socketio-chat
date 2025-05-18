@@ -7,26 +7,26 @@ import ProfileStore from "../../store/ProfileStore";
 import XMarkIcon from "../svg/24/XMarkIcon";
 
 function StickerSelector() {
-  const myId = ProfileStore((state) => state.id);
-  const myName = ProfileStore((state) => state.name);
+  const userId = ProfileStore((state) => state.id);
+  const username = ProfileStore((state) => state.name);
 
-  const replyIdFlag = AppStore((state) => state.replyId);
-  const showStickerBar = AppStore((state) => state.showStickerBar);
+  const replyId = AppStore((state) => state.replyId);
+  const showStickerBar = AppStore((state) => state.stickerBar);
 
   const setReplyIdFlag = AppStore((state) => state.setReplyId);
   const setShowStickerBar = AppStore((state) => state.setStickerBar);
 
-  const insertBubble = ChatStore((state) => state.insertBubble);
+  const insertBubble = ChatStore((state) => state.insert);
 
   if (!showStickerBar) return;
 
   const closeStickerBar = () => setShowStickerBar(false);
   const sendSticker = (id: number) => {
-    if (replyIdFlag != -1) setReplyIdFlag(-1);
+    if (replyId != -1) setReplyIdFlag(-1);
     setShowStickerBar(false);
 
-    const bubble = new BubbleContainer({ type: "sticker", id }, -1, myId, myName, replyIdFlag);
-    Socket.emit("message", bubble, (res) => {
+    const bubble = new BubbleContainer({ type: "sticker", id }, -1, userId, username, replyId);
+    Socket.emit("message", bubble.content, bubble.replyId, (res) => {
       bubble.id = res;
       insertBubble(bubble);
     });

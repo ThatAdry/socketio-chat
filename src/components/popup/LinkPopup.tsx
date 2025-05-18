@@ -4,9 +4,9 @@ import LinkIcon from "../svg/24/LinkIcon";
 import XMarkIcon from "../svg/24/XMarkIcon";
 
 function LinkPopup() {
+  const chatId = GroupStore((state) => state.id);
   const popupId = AppStore((state) => state.popupId);
   const setPopupId = AppStore((state) => state.setPopupId);
-  const chatId = GroupStore((state) => state.id);
 
   if (popupId != "link") return null;
 

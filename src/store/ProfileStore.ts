@@ -5,7 +5,6 @@ type UserJson = ReturnType<typeof User.prototype.toJSON>
 
 interface Props {
   logged: boolean;
-
   login(UserData: UserJson): void;
   logout(): void;
   setAdmin(value: boolean): void

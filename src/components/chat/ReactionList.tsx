@@ -5,7 +5,7 @@ import ProfileStore from "../../store/ProfileStore";
 
 export default function ReactionList({ container }: { container: BubbleContainer }) {
   const myId = ProfileStore((state) => state.id);
-  const updateChat = ChatStore((state) => state.update);
+  const updateChat = ChatStore((state) => state.refresh);
 
   const reactionList = Object.entries(container.reactions);
   const reactionCount = reactionList.reduce((count, array) => count + array[1].length, 0);

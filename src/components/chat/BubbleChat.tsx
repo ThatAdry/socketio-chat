@@ -86,7 +86,7 @@ function BubbleChat({ container, aling }: Props) {
         <div className={`flex ${aling == "left" ? "" : "flex-row-reverse"} w-full`}>
           <div className="bg-main-600 border border-main-400 rounded w-fit max-w-8/11 px-2 py-1 shadow-md text-sm">
             <div className="flex gap-2 justify-between items-center">
-              <label className="text-white/50">Mensaje eliminado de {container.authorName}</label>
+              <label className="text-white/50">Message deleted from {container.authorName}</label>
               <Time data={container.date} />
             </div>
           </div>

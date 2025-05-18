@@ -19,7 +19,7 @@ const GroupStore = create<GroupJson & Props>((set, get) => ({
   id: "",
   admin: new User(),
   users: [],
-
+  
   getUser: (id) => get().users.find((user) => user.id == id),
   addUser: (user) => set((state) => ({ users: [...state.users, user] })),
   setAdmin: (id) => {

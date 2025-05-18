@@ -13,22 +13,22 @@ import StickerSelector from "./StickerSelector";
 function InputBar() {
   const inputText = useRef<HTMLInputElement>(null);
 
-  const myId = ProfileStore((state) => state.id);
-  const myName = ProfileStore((state) => state.name);
+  const userId = ProfileStore((state) => state.id);
+  const username = ProfileStore((state) => state.name);
 
-  const replyIdFlag = AppStore((state) => state.replyId);
+  const replyId = AppStore((state) => state.replyId);
   const setReplyIdFlag = AppStore((state) => state.setReplyId);
   const setStickerBar = AppStore((state) => state.setStickerBar);
 
-  const insertBubble = ChatStore((state) => state.insertBubble);
+  const insertBubble = ChatStore((state) => state.insert);
 
   const sendMessage = () => {
     if (inputText.current) {
       const message = inputText.current.value.trim();
       if (message != "") {
         inputText.current.value = "";
-        const bubble = new BubbleContainer({ type: "text", message }, -1, myId, myName, replyIdFlag);
-        Socket.emit("message", bubble.toJSON(), (res) => {
+        const bubble = new BubbleContainer({ type: "text", message }, -1, userId, username, replyId);
+        Socket.emit("message", bubble.content, bubble.replyId, (res) => {
           bubble.id = res;
           setReplyIdFlag(-1);
           insertBubble(bubble);

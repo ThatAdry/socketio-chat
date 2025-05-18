@@ -21,7 +21,7 @@ function AppWindow() {
   const setAdmin = GroupStore((state) => state.setAdmin);
   const removeUser = GroupStore((state) => state.removeUser);
   const clearChat = GroupStore((state) => state.clearData);
-  const insertBubble = ChatStore((state) => state.insertBubble);
+  const insertBubble = ChatStore((state) => state.insert);
   const setPopupId = AppStore((state) => state.setPopupId);
 
   useEffect(() => {
