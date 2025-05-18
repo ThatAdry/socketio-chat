@@ -15,7 +15,10 @@ function Login() {
 
     const id = location.pathname.slice(1, location.pathname.length);
     if (id != "") setChatId(id);
-  });
+    return () => {
+      Socket.off("connect_error")
+    }
+  }, [chatId]);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

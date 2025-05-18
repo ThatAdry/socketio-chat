@@ -4,10 +4,10 @@ import ChatStore from "../../store/ChatStore";
 import ProfileStore from "../../store/ProfileStore";
 import XMarkIcon from "../svg/24/XMarkIcon";
 
-const reactionList = ["😂", "😭", "😐", "🤨", "😡", "💀"]
+const reactionList = ["😂", "😭", "😐", "🤨", "😡", "💀"];
 
 export default function ReactSelector() {
-  const myId = ProfileStore((state) => state.id)
+  const myId = ProfileStore((state) => state.id);
   const reactId = AppStore((state) => state.reactId);
   const setReactId = AppStore((state) => state.setReactId);
   const getBubble = ChatStore((state) => state.getBubble);
@@ -15,15 +15,15 @@ export default function ReactSelector() {
 
   if (reactId == -1) return null;
 
-  const bubble = getBubble(reactId)
-  const list = reactionList.filter(emoji => bubble?.hasReaction(myId, emoji) == false);
+  const bubble = getBubble(reactId);
+  const list = reactionList.filter((emoji) => bubble?.hasReaction(myId, emoji) == false);
 
   const reactMessage = (value: string) => {
-    setReactId(-1)
+    setReactId(-1);
     Socket.emit("reactMessage", value, reactId, () => {
-      modifyBubble(reactId, (bubble) => bubble.react(value, myId))
-    })
-  }
+      modifyBubble(reactId, (bubble) => bubble.react(value, myId));
+    });
+  };
 
   return (
     <div className="bg-main-800 text-white/75 flex items-center">
@@ -33,7 +33,9 @@ export default function ReactSelector() {
       <label>React</label>
       <div className="flex gap-1 px-2">
         {list.map((emoji, i) => (
-          <button className="cursor-pointer hover:scale-120" onClick={() => reactMessage(emoji)} key={i}>{emoji}</button>
+          <button className="cursor-pointer hover:scale-120" onClick={() => reactMessage(emoji)} key={i}>
+            {emoji}
+          </button>
         ))}
       </div>
     </div>

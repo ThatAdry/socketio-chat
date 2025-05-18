@@ -11,10 +11,8 @@ function ChatBox() {
   const myId = ProfileStore((state) => state.id);
   const adminId = GroupStore((state) => state.admin.id);
   const chatHistory = ChatStore((state) => state.history);
-  const getBubble = ChatStore((state) => state.getBubble);
   const insertBubble = ChatStore((state) => state.insert);
   const modifyBubble = ChatStore((state) => state.modify);
-  const refreshChat = ChatStore((state) => state.refresh);
 
   useEffect(() => {
     Socket.on("message", (content) => {

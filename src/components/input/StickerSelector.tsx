@@ -51,4 +51,4 @@ function StickerSelector() {
   );
 }
 
-export default StickerSelector
+export default StickerSelector;
