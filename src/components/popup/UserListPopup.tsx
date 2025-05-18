@@ -11,7 +11,11 @@ function UserListPopup() {
   const users = GroupStore((state) => state.users);
   const adminId = GroupStore((state) => state.admin.id);
 
+  const popupId = AppStore((state) => state.popupId);
   const setPopupId = AppStore((state) => state.setPopupId);
+
+  
+  if (popupId != "userlist") return null;
 
   const onClick = () => {
     Socket.disconnect();
@@ -24,10 +28,10 @@ function UserListPopup() {
           <button className="cursor-pointer p-2 hover:text-white" onClick={() => setPopupId("")}>
             <XMarkIcon />
           </button>
-          <label>Usuarios</label>
+          <label>Users</label>
           <div className="ml-auto">
             <button className="cursor-pointer p-2 hover:text-white flex gap-2" onClick={onClick}>
-              Salir del chat
+              Exit from the chat
               <ExitIcon />
             </button>
           </div>

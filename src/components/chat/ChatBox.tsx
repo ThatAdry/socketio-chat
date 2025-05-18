@@ -9,16 +9,16 @@ import GroupStore from "../../store/GroupStore";
 
 function ChatBox() {
   const myId = ProfileStore((state) => state.id);
-  const admin = GroupStore((state) => state.admin.id);
-  const history = ChatStore((state) => state.history);
-  const get = ChatStore((state) => state.getBubble);
-  const save = ChatStore((state) => state.insertBubble);
+  const adminId = GroupStore((state) => state.admin.id);
+  const chatHistory = ChatStore((state) => state.history);
+  const getBubble = ChatStore((state) => state.getBubble);
+  const insertBubble = ChatStore((state) => state.insertBubble);
   const updateBubble = ChatStore((state) => state.modifyBubble);
   const updateChat = ChatStore((state) => state.update);
 
   useEffect(() => {
     Socket.on("message", (content) => {
-      save(BubbleContainer.fromJSON(content));
+      insertBubble(BubbleContainer.fromJSON(content));
     });
 
     Socket.on("reactMessage", (value, id, userId) => {
@@ -34,8 +34,8 @@ function ChatBox() {
     });
 
     Socket.on("deleteMessage", (id, from) => {
-      const bubble = get(id);
-      if (bubble && (bubble.authorId == from || admin == from)) {
+      const bubble = getBubble(id);
+      if (bubble && (bubble.authorId == from || adminId == from)) {
         bubble.setRemoved();
         updateChat();
       }
@@ -51,7 +51,7 @@ function ChatBox() {
   return (
     <StickyScroll className="bg-main-700 scrollbar scrollbar-w-2 scrollbar-track-main-700 scrollbar-thumb-main-400 hover:scrollbar-thumb-main-300 h-full overflow-x-hidden overflow-y-scroll">
       <div className="bg-main-700 pl-2 pr-0.5 py-1 flex flex-col">
-        {history.map((bubble, i) => (
+        {chatHistory.map((bubble, i) => (
           <BubbleChat container={bubble} aling={myId == bubble.authorId ? "right" : "left"} key={i} />
         ))}
       </div>

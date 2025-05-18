@@ -6,7 +6,7 @@ import AppStore from "../../store/AppStore";
 import ChatStore from "../../store/ChatStore";
 import BubbleContainer from "../../classes/BubbleContainer";
 import ProfileStore from "../../store/ProfileStore";
-import ReactFlag from "./ReactFlag";
+import ReactSelector from "./ReactSelector";
 import ReplyFlag from "./ReplyFlag";
 import StickerSelector from "./StickerSelector";
 
@@ -43,20 +43,20 @@ function InputBar() {
     }
   };
 
-  const submitMessage = () => sendMessage();
+  const onSubmitMessage = () => sendMessage();
   const onOpenStickerBar = () => setStickerBar(true);
 
   return (
     <div className="border-t border-main-400">
       <ReplyFlag />
-      <ReactFlag />
+      <ReactSelector />
       <StickerSelector />
       <div className="p-2 grow-0 flex gap-2">
         <button className="text-white/75 hover:text-white cursor-pointer p-2" onClick={onOpenStickerBar}>
           <StickersIcon />
         </button>
         <input type="text" className="bg-main-700 px-4 py-2 rounded-md outline-0 w-full" placeholder="Type here..." autoComplete="off" ref={inputText} onKeyDown={onKeyDown} />
-        <button className="text-white/75 hover:text-white cursor-pointer p-2" onClick={submitMessage}>
+        <button className="text-white/75 hover:text-white cursor-pointer p-2" onClick={onSubmitMessage}>
           <SendIcon />
         </button>
       </div>

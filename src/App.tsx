@@ -43,11 +43,8 @@ function App() {
     };
   });
 
-  if (logged) {
-    return <AppWindow></AppWindow>;
-  } else {
-    return <Login></Login>;
-  }
+  if (logged) return <AppWindow></AppWindow>;
+  return <Login></Login>;
 }
 
 export default App;

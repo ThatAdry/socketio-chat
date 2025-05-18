@@ -15,7 +15,7 @@ const AppStore = create<Props>((set) => ({
   replyId: -1,
   reactId: -1,
   showStickerBar: false,
-  popupId: "link",
+  popupId: "",
   setReplyId: (replyId) => set({ replyId }),
   setReactId: (reactId) => set({ reactId }),
   setStickerBar: (showStickerBar) => set({ showStickerBar }),

@@ -10,7 +10,8 @@ import ChatStore from "../store/ChatStore";
 import BubbleContainer from "../classes/BubbleContainer";
 import AppStore from "../store/AppStore";
 import ProfileStore from "../store/ProfileStore";
-import PopupBox from "./popup/PopupBox";
+import UserListPopup from "./popup/UserListPopup";
+import LinkPopup from "./popup/LinkPopup";
 
 function AppWindow() {
   const myId = ProfileStore((state) => state.id);
@@ -80,7 +81,8 @@ function AppWindow() {
           </div>
           <div className="relative grow overflow-hidden">
             <ChatBox />
-            <PopupBox />
+            <UserListPopup/>
+            <LinkPopup/>
           </div>
           <InputBar />
         </div>

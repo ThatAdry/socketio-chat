@@ -4,7 +4,9 @@ import ChatStore from "../../store/ChatStore";
 import ProfileStore from "../../store/ProfileStore";
 import XMarkIcon from "../svg/24/XMarkIcon";
 
-export default function ReactFlag() {
+const reactionList = ["😂", "😭", "😐", "🤨", "😡", "💀"]
+
+export default function ReactSelector() {
   const myId = ProfileStore((state) => state.id)
   const reactIdFlag = AppStore((state) => state.reactId);
   const setReactIdFlag = AppStore((state) => state.setReactId);
@@ -14,8 +16,7 @@ export default function ReactFlag() {
   if (reactIdFlag == -1) return null;
 
   const bubble = getBubble(reactIdFlag)
-
-  const reactions = ["😂", "😭", "😐", "🤨", "😡", "💀"].filter(emoji => bubble?.hasReaction(myId, emoji) == false);
+  const list = reactionList.filter(emoji => bubble?.hasReaction(myId, emoji) == false);
 
   const reactMessage = (value: string) => {
     setReactIdFlag(-1)
@@ -31,7 +32,7 @@ export default function ReactFlag() {
       </button>
       <label>React</label>
       <div className="flex gap-1 px-2">
-        {reactions.map((emoji, i) => (
+        {list.map((emoji, i) => (
           <button className="cursor-pointer hover:scale-120" onClick={() => reactMessage(emoji)} key={i}>{emoji}</button>
         ))}
       </div>

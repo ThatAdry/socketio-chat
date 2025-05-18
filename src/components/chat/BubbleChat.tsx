@@ -1,13 +1,12 @@
 import BubbleContainer from "../../classes/BubbleContainer";
 import Time from "./Time";
 import ReactionList from "./ReactionList";
-import OptionList from "./OptionList";
+import Actions from "./Actions";
 import Reply from "./Reply";
 import Stickers from "../../consts/stickers";
 
 interface Props {
   container: BubbleContainer;
-  sticky?: boolean;
   aling: "left" | "right" | "center";
 }
 
@@ -35,7 +34,7 @@ function BubbleChat({ container, aling }: Props) {
             <Reply id={container.replyId} />
             <p className="wrap-anywhere">{content.message}</p>
           </div>
-          <OptionList container={container} />
+          <Actions container={container} />
         </div>
         <ReactionList container={container} />
       </div>
@@ -59,7 +58,7 @@ function BubbleChat({ container, aling }: Props) {
               <img className="aspect-square rounded" width={125} src={Stickers[content.id]} alt="Sticker" />
             </div>
           </div>
-          <OptionList container={container} />
+          <Actions container={container} />
         </div>
         <ReactionList container={container} />
       </div>

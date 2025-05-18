@@ -4,8 +4,11 @@ import LinkIcon from "../svg/24/LinkIcon";
 import XMarkIcon from "../svg/24/XMarkIcon";
 
 function LinkPopup() {
+  const popupId = AppStore((state) => state.popupId);
   const setPopupId = AppStore((state) => state.setPopupId);
   const chatId = GroupStore((state) => state.id);
+
+  if (popupId != "link") return null;
 
   const link = location.origin + "/" + chatId;
   const copyLink = () =>
@@ -21,12 +24,12 @@ function LinkPopup() {
           <button className="cursor-pointer p-2 text-white/75 hover:text-white" onClick={() => setPopupId("")}>
             <XMarkIcon />
           </button>
-          <label>Enlace de invitación</label>
+          <label>Invitation link</label>
         </div>
         <div className="flex items-center bg-main-700 p-1">
           <button className="cursor-pointer flex gap-2 p-2 bg-main-600 rounded border border-main-400 hover:bg-main-400" onClick={copyLink}>
             <LinkIcon />
-            <span>Copiar</span>
+            <span>Copy</span>
           </button>
           <label className="text-center underline px-5">{link}</label>
         </div>
@@ -35,4 +38,4 @@ function LinkPopup() {
   );
 }
 
-export default LinkPopup
+export default LinkPopup;

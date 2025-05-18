@@ -26,21 +26,14 @@ export default class BubbleContainer {
   public replyId: number = -2;
   public authorId: string;
   public authorName: string;
-  public reactions: { [key: string]: string[] } = {
-    // "😂": ["1", "2", "3", "4"],
-    // "😭": ["1", "2", "3", "4"],
-    // "😐": ["1", "2", "3", "4"],
-    // "🤨": ["1", "2", "3", "4"],
-    // "😡": ["1", "2", "3", "4"],
-    // "💀": ["1", "2", "3", "4"],
-  };
+  public reactions: { [key: string]: string[] } = {};
   public date: number = Date.now();
 
   constructor(content: ContentType, id?: number, authorId?: string, authorName?: string, replyId?: number) {
     this.content = content;
     this.id = id ?? -1;
     this.authorId = authorId ?? "none";
-    this.authorName = authorName ?? "anonimo";
+    this.authorName = authorName ?? "Anonimous";
     this.replyId = replyId ?? -1;
   }
 
@@ -65,7 +58,7 @@ export default class BubbleContainer {
   }
 
   setRemoved() {
-    this.content = { type: "deleted", text: "Mensaje Eliminado" };
+    this.content = { type: "deleted", text: "Deleted Message" };
   }
 
   toJSON() {
