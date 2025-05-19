@@ -68,8 +68,8 @@ function BubbleChat({ container, aling }: Props) {
     const [bgColor, textColor] = alertStyles[content.level];
 
     return (
-      <div className={`w-full py-1 group flex flex-col items-center`} id={"bubble-" + container.id}>
-        <div className={`flex justify-center w-full`}>
+      <div className="w-full py-1 group flex flex-col items-center" id={"bubble-" + container.id}>
+        <div className="flex justify-center w-full">
           <div className={`${bgColor} ${textColor} rounded w-fit max-w-8/11 px-2 py-1 shadow-md text-sm animate-bubble`}>
             <div className="flex gap-2 justify-between items-center">
               <p className="font-semibold">{content.description}</p>
