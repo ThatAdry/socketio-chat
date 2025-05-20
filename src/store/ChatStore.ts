@@ -8,6 +8,7 @@ interface Props {
   modify(id: number, callback: (item: BubbleContainer) => void): void;
   insert(chatItem: BubbleContainer): void;
   remove(id: number): void;
+  clearData(): void;
   refresh(): void
 }
 
@@ -35,6 +36,7 @@ const ChatStore = create<Props>((set, get) => ({
         return { history: state.history };
       } else return {};
     }),
+    clearData: () => set({ history: []}),
     refresh: () => set(state => ({ history: [...state.history] }))
 }));
 
